@@ -32,6 +32,7 @@ public class Usuario {
     @Column(nullable = false)
     private TrainingLevel trainingLevel;
 
+    //representa a data e hora de criação do registro.
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }
