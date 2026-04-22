@@ -13,6 +13,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     // O Optional evita o NullPointerException (erro que acontece no Java quando o
     // seu código tenta usar uma referência de objeto que está "vazia")
     // obrigando quem chama o metodo a tratar o caso onde o usuario não existe
-    
+
 }
 
