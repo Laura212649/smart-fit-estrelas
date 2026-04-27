@@ -1,4 +1,4 @@
-package com.empresa.smartestrelas.usuario.exception;
+package com.empresa.smartestrelas.exception;
 
 public class SenhaInvalidaException extends RuntimeException {
     public SenhaInvalidaException() {
