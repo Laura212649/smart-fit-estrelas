@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,6 +60,12 @@ public class UsuarioService {
                         usuario.getCreatedAt(),
                         usuario.getRole()))
                 .collect(Collectors.toList());
+    }
+    public void deletar(Long id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new NoSuchElementException("Usuário não encontrado");
+        }
+        usuarioRepository.deleteById(id);
     }
 }
 
