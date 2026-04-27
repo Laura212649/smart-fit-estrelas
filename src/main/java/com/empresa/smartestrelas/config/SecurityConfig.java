@@ -26,6 +26,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST,"/usuarios").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuarios").permitAll()
                         .requestMatchers(HttpMethod.DELETE,"/usuarios/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT,"/usuarios/**").permitAll()
                         .anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults());
 
