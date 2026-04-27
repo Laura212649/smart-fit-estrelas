@@ -1,5 +1,9 @@
-package com.empresa.smartestrelas.usuario;
+package com.empresa.smartestrelas.controller;
 
+import com.empresa.smartestrelas.model.Usuario;
+import com.empresa.smartestrelas.dto.UsuarioRequest;
+import com.empresa.smartestrelas.dto.UsuarioResponse;
+import com.empresa.smartestrelas.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +23,9 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponse> register(@Valid @RequestBody UsuarioRequest request) throws Exception {
-
-        Usuario usuario = usuarioService.registrar(request);
+    public ResponseEntity<UsuarioResponse> criar(@Valid @RequestBody UsuarioRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new UsuarioResponse(usuario));
+                .body(usuarioService.criar(request));
     }
 }
 
