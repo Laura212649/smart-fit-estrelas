@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
@@ -35,6 +38,7 @@ public class UsuarioService {
         usuario.setEmail(request.getEmail());
         usuario.setPassword(hashedPassword);
         usuario.setTrainingLevel(request.getTrainingLevel());
+        usuario.setRole(request.getRole());
 
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
 
@@ -43,7 +47,18 @@ public class UsuarioService {
                 usuario.getUserName(),
                 usuario.getEmail(),
                 usuario.getTrainingLevel(),
-                usuario.getCreatedAt());
+                usuario.getCreatedAt(),
+                usuario.getRole());
+    }
+    public List<UsuarioResponse> listarTodos() {
+        return usuarioRepository.findAll().stream().map(usuario -> new UsuarioResponse(
+                        usuario.getId(),
+                        usuario.getUserName(),
+                        usuario.getEmail(),
+                        usuario.getTrainingLevel(),
+                        usuario.getCreatedAt(),
+                        usuario.getRole()))
+                .collect(Collectors.toList());
     }
 }
 
