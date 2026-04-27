@@ -1,4 +1,4 @@
-package com.empresa.smartestrelas.usuario.exception;
+package com.empresa.smartestrelas.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
