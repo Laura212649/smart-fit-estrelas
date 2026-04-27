@@ -7,10 +7,9 @@ import com.empresa.smartestrelas.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -26,6 +25,14 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponse> criar(@Valid @RequestBody UsuarioRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(usuarioService.criar(request));
+    }
+    @GetMapping
+    public ResponseEntity<List<UsuarioResponse>> listarTodos() {
+        List<UsuarioResponse> usuarios = usuarioService.listarTodos();
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(usuarios);
     }
 }
 
