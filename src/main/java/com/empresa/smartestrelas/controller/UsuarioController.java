@@ -1,6 +1,5 @@
 package com.empresa.smartestrelas.controller;
 
-import com.empresa.smartestrelas.model.Usuario;
 import com.empresa.smartestrelas.dto.UsuarioRequest;
 import com.empresa.smartestrelas.dto.UsuarioResponse;
 import com.empresa.smartestrelas.service.UsuarioService;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -34,5 +34,18 @@ public class UsuarioController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(usuarios);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        try {
+            usuarioService.deletar(id);
+            // 204 No Content quando o usuario é deletado com sucesso
+            return ResponseEntity.noContent().build();
+        } catch (NoSuchElementException e) {
+            // 404 Not Found quando o usuario não existe
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
+
 
