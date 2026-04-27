@@ -25,6 +25,7 @@ public class SecurityConfig {
                                 "/swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.POST,"/usuarios").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.DELETE,"/usuarios/**").permitAll()
                         .anyRequest().authenticated()
                 ).httpBasic(Customizer.withDefaults());
 
