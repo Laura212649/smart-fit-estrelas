@@ -67,5 +67,23 @@ public class UsuarioService {
         }
         usuarioRepository.deleteById(id);
     }
-}
 
+    public UsuarioResponse atualizar(Long id, UsuarioRequest request) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
+        usuario.setUserName(request.getUsername());
+        usuario.setEmail(request.getEmail());
+        usuario.setTrainingLevel(request.getTrainingLevel());
+        usuario.setRole(request.getRole());
+
+        usuarioRepository.save(usuario);
+
+        return new UsuarioResponse(
+                usuario.getId(),
+                usuario.getUserName(),
+                usuario.getEmail(),
+                usuario.getTrainingLevel(),
+                usuario.getCreatedAt(),
+                usuario.getRole());
+    }
+}
