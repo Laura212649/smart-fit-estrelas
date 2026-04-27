@@ -46,6 +46,18 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
-}
+        @PutMapping("/{id}")
+        public ResponseEntity<UsuarioResponse> atualizar(@PathVariable Long id, @Valid @RequestBody UsuarioRequest request) {
+            try {
+                UsuarioResponse response = usuarioService.atualizar(id, request);
+                return ResponseEntity.ok(response);
+               // 200 OK quando a atualização é bem-sucedida
+            } catch (NoSuchElementException e) {
+                return ResponseEntity.notFound().build();
+                //404 Found se o usuario não existir
+            }
+        }
+    }
+
 
 
