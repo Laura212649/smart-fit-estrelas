@@ -1,4 +1,4 @@
-package com.empresa.smartestrelas.usuario;
+package com.empresa.smartestrelas.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,8 +19,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String userName;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -35,4 +35,6 @@ public class Usuario {
     //representa a data e hora de criação do registro.
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    private String role;
 }
