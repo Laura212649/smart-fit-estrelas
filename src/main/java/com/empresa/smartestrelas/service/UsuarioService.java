@@ -35,7 +35,7 @@ public class UsuarioService {
         }
         String hashedPassword = passwordEncoder.encode(request.getPassword());
         Usuario usuario = new Usuario();
-        usuario.setUserName(request.getUsername());
+        usuario.setUsername(request.getUsername());
         usuario.setEmail(request.getEmail());
         usuario.setPassword(hashedPassword);
         usuario.setTrainingLevel(request.getTrainingLevel());
@@ -45,7 +45,7 @@ public class UsuarioService {
 
         return new UsuarioResponse(
                 usuario.getId(),
-                usuario.getUserName(),
+                usuario.getUsername(),
                 usuario.getEmail(),
                 usuario.getTrainingLevel(),
                 usuario.getCreatedAt(),
@@ -54,7 +54,7 @@ public class UsuarioService {
     public List<UsuarioResponse> listarTodos() {
         return usuarioRepository.findAll().stream().map(usuario -> new UsuarioResponse(
                         usuario.getId(),
-                        usuario.getUserName(),
+                        usuario.getUsername(),
                         usuario.getEmail(),
                         usuario.getTrainingLevel(),
                         usuario.getCreatedAt(),
@@ -71,7 +71,7 @@ public class UsuarioService {
     public UsuarioResponse atualizar(Long id, UsuarioRequest request) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado"));
-        usuario.setUserName(request.getUsername());
+        usuario.setUsername(request.getUsername());
         usuario.setEmail(request.getEmail());
         usuario.setTrainingLevel(request.getTrainingLevel());
         usuario.setRole(request.getRole());
@@ -80,7 +80,7 @@ public class UsuarioService {
 
         return new UsuarioResponse(
                 usuario.getId(),
-                usuario.getUserName(),
+                usuario.getUsername(),
                 usuario.getEmail(),
                 usuario.getTrainingLevel(),
                 usuario.getCreatedAt(),
