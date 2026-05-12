@@ -15,19 +15,23 @@ public class DatabaseSeeder {
     CommandLineRunner initDatabase(EquipamentoRepository equipRepo, MusculosRepository musculosRepo) {
         return args -> {
             if (equipRepo.count() == 0) {
-                Equipamento barbell = new Equipamento();
-                barbell.setName("Barbell");
-                equipRepo.save(barbell);
+                Equipamento e1 = new Equipamento();
+                e1.setNome("Barbell");
+                equipRepo.save(e1);
 
                 Equipamento bench = new Equipamento();
-                barbell.setName("Bench");
+                bench.setNome("Bench");
                 equipRepo.save(bench);
+
+                Equipamento dumbbell = new Equipamento();
+                dumbbell.setNome("Dumbbell");
+                equipRepo.save(dumbbell);
             }
 
             if (musculosRepo.count() == 0) {
                 Musculos chest = new Musculos();
-                chest.setName("Peitoral maior");
-                chest.setNameEn("Pectoralis major");
+                chest.setNome("Peitoral maior");
+                chest.setNomeEn("Pectoralis major");
                 musculosRepo.save(chest);
             }
 
