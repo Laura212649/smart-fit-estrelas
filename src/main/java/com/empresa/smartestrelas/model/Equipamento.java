@@ -10,6 +10,6 @@ public class Equipamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String name; // Ex: Barbell, Dumbbell, Bench [cite: 60, 111, 115]
+    @Column(nullable = false)
+    private String nome; // Ex: Barbell, Dumbbell, Bench [cite: 60, 111, 115]
 }
