@@ -21,15 +21,15 @@ public class ExercicioService {
     private MusculosRepository musculosRepository;
 
     @Autowired
-    private ExercicioRepository repository;
+    private ExercicioRepository exercicioRepository;
 
     public List<Exercicio> listarTodos() {
-        return repository.findAll();
+        return exercicioRepository.findAll();
     }
 
     // Buscar por tratamento de erro (Retorna 404 se não existir)
     public Exercicio buscarPorId(Long id) {
-        return repository.findById(id)
+        return exercicioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Exercício não encontrado com ID: " + id));
     }
     @Transactional
@@ -47,14 +47,14 @@ public class ExercicioService {
         if (dto.secondaryMusculosIds() != null) {
             exercicio.setSecondaryMusculos(musculosRepository.findAllById(dto.secondaryMusculosIds()));
         }
-        return repository.save(exercicio);
+        return exercicioRepository.save(exercicio);
     }
     public List<Exercicio> listarComFiltros(String categoria, Long equipamentoId, Long musculoId) {
-        if (categoria != null) return repository.findByCategory(categoria);
-        if (equipamentoId != null) return repository.findByEquipment_Id(equipamentoId);
-        if (musculoId != null) return repository.findByPrimaryMuscles_Id(musculoId);
+        if (categoria != null) return exercicioRepository.findByCategoria(categoria);
+        if (equipamentoId != null) return exercicioRepository.findByEquipamentos_Id(equipamentoId);
+        if (musculoId != null) return exercicioRepository.findByPrimaryMusculos_Id(musculoId);
 
-        return repository.findAll();
+        return exercicioRepository.findAll();
     }
     @Transactional
     public Exercicio atualizar(Long id, Exercicio exercicioAtualizado) {
@@ -64,11 +64,11 @@ public class ExercicioService {
         exercicioExistente.setDescricao(exercicioAtualizado.getDescricao());
         exercicioExistente.setCategoria(exercicioAtualizado.getCategoria());
 
-        return repository.save(exercicioExistente);
+        return exercicioRepository.save(exercicioExistente);
     }
     @Transactional
     public void excluir(Long id) {
         Exercicio exercicio = buscarPorId(id);
-        repository.delete(exercicio);
+        exercicioRepository.delete(exercicio);
     }
 }
