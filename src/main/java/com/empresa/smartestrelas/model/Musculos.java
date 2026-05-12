@@ -11,8 +11,8 @@ public class Musculos {
     private Long id;
 
     @Column(nullable = false)
-    private String name; // Ex: Peitoral maior [cite: 118]
+    private String nome; // Ex: Peitoral maior [cite: 118]
 
     @Column(nullable = false)
-    private String nameEn; // Ex: Pectoralis major [cite: 118]
+    private String nomeEn; // Ex: Pectoralis major [cite: 118]
 }
