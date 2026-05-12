@@ -8,9 +8,12 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.web.servlet.function.RequestPredicates.headers;
 
 @EnableWebSecurity
 @Configuration
@@ -22,13 +25,19 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/v3/api-docs/**",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html").permitAll()
+                                "/swagger-ui.html",
+                                "/h2-console/**",
+                                "/exercicios/**").permitAll()
                         .requestMatchers(HttpMethod.POST,"/usuarios").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuarios").permitAll()
                         .requestMatchers(HttpMethod.DELETE,"/usuarios/**").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/usuarios/**").permitAll()
                         .anyRequest().authenticated()
-                ).httpBasic(Customizer.withDefaults());
+                )
+                .httpBasic(Customizer.withDefaults())
+        .headers(headers -> headers
+                .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
+        );
 
         return http.build();
     }
