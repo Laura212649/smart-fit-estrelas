@@ -7,7 +7,7 @@ import org.springframework.aot.generate.GeneratedTypeReference;
 import java.util.List;
 
 @Entity
-@Table(name = "exercicos")
+@Table(name = "exercicios")
 @Data
 public class Exercicio {
     @Id
