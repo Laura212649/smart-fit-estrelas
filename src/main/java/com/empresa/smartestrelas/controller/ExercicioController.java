@@ -16,12 +16,12 @@ import java.util.List;
 @RequestMapping("/exercicios")
 public class ExercicioController {
     @Autowired
-    private ExercicioService service;
+    private ExercicioService exercicioService;
 
     // POST /exercises (Admin) - Cadastra um novo exercício [cite: 69]
     @PostMapping
     public ResponseEntity<Exercicio> criar(@RequestBody @Valid ExercicioRequest dto) {
-        Exercicio novo = service.salvarComIds(dto);
+        Exercicio novo = exercicioService.salvarComIds(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novo);
     }
 
@@ -31,20 +31,20 @@ public class ExercicioController {
             @RequestParam(required = false) String category,
             @RequestParam(required = false) Long equipmentId,
             @RequestParam(required = false) Long muscleId) {
-        return service.listarComFiltros(category, equipmentId, muscleId);
+        return exercicioService.listarComFiltros(category, equipmentId, muscleId);
     }
 
     // GET /exercises/{id} - Detalhes de um exercício [cite: 79]
     @GetMapping("/{id}")
     public Exercicio buscar(@PathVariable Long id) {
-        return service.buscarPorId(id);
+        return exercicioService.buscarPorId(id);
     }
 
     // DELETE /exercises/{id} (Admin) [cite: 80]
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable Long id) {
-        service.excluir(id);
+        exercicioService.excluir(id);
     }
 }
 
