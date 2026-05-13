@@ -18,29 +18,29 @@ public class ExercicioController {
     @Autowired
     private ExercicioService exercicioService;
 
-    // POST /exercises (Admin) - Cadastra um novo exercício [cite: 69]
+    // POST /exercicios (Admin) - Cadastra um novo exercício
     @PostMapping
     public ResponseEntity<Exercicio> criar(@RequestBody @Valid ExercicioRequest dto) {
         Exercicio novo = exercicioService.salvarComIds(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novo);
     }
 
-    // GET /exercises - Lista todos com suporte a filtros [cite: 77]
+    // GET /exercicios - Lista todos com suporte a filtros
     @GetMapping
     public List<Exercicio> listar(
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) Long equipmentId,
-            @RequestParam(required = false) Long muscleId) {
-        return exercicioService.listarComFiltros(category, equipmentId, muscleId);
+            @RequestParam(required = false) String categoria,
+            @RequestParam(required = false) Long equipamentoId,
+            @RequestParam(required = false) Long musculosId) {
+        return exercicioService.listarComFiltros(categoria, equipamentoId, musculosId);
     }
 
-    // GET /exercises/{id} - Detalhes de um exercício [cite: 79]
+    // GET /exercicios/{“id”}
     @GetMapping("/{id}")
     public Exercicio buscar(@PathVariable Long id) {
         return exercicioService.buscarPorId(id);
     }
 
-    // DELETE /exercises/{id} (Admin) [cite: 80]
+    // DELETE /exercicios/{id} (Admin)
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable Long id) {
