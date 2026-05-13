@@ -1,7 +1,8 @@
-package com.empresa.smartestrelas.model;
+package com.empresa.smartestrelas.controller;
 
 import com.empresa.smartestrelas.dto.TrainingPlanRequest;
 import com.empresa.smartestrelas.dto.TrainingPlanResponse;
+import com.empresa.smartestrelas.model.Usuario;
 import com.empresa.smartestrelas.service.TrainingPlanService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,16 @@ public class TrainingPlanController {
         TrainingPlanResponse response = service.criar(request, usuarioLogado);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<TrainingPlanResponse> buscarPorId(
+            @PathVariable Long id,
+            @AuthenticationPrincipal Usuario usuarioLogado) {
 
-    @GetMapping
-    public ResponseEntity<List<TrainingPlanResponse>> listar(@AuthenticationPrincipal Usuario usuarioLogado) {
-        // Log de entrada (INFO)
-        System.out.println("INFO: Listando planos de treino - GET /training-plans - Usuário: " + usuarioLogado.getEmail());
 
-        List<TrainingPlanResponse> planos = service.listarPorUsuario(usuarioLogado);
-        return ResponseEntity.ok(planos);
+        System.out.println("INFO: Consultando plano de treino - GET /training-plans/" + id + " - Usuário ID: " + usuarioLogado.getId());
+
+
+        return ResponseEntity.ok().build();
     }
+
 }
