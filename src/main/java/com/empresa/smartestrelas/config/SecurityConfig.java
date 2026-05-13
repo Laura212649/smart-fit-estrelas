@@ -13,8 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.web.servlet.function.RequestPredicates.headers;
-
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
@@ -28,6 +26,8 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/h2-console/**",
                                 "/exercicios/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/exercicios/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/exercicios/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/usuarios").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuarios").permitAll()
                         .requestMatchers(HttpMethod.DELETE,"/usuarios/**").permitAll()
