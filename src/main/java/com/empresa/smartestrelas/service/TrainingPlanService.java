@@ -6,6 +6,7 @@ import com.empresa.smartestrelas.repository.TrainingPlanRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.empresa.smartestrelas.dto.ExerciciosSlotRequest;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class TrainingPlanService {
     @Autowired
     private ExercicioRepository exercicioRepository;
 
-    public List<TrainingPlanResponse> listarPorUsuario(Usuario usuario) {
+    public List<TrainingPlanResponse> listarPlanos(Usuario usuario) {
         // Usa o repositório para buscar apenas os planos do dono
         return repository.findByUsuario(usuario)
                 .stream()
@@ -34,6 +35,7 @@ public class TrainingPlanService {
         plano.setWeekCount(request.weekCount()); // [cite: 162]
         plano.setUsuario(usuarioAutenticado);
 
+
         // 2. Mapear Semanas
         for (TrainingPlanWeekRequest weekDto : request.weeks()) { // [cite: 163]
             TrainingPlanWeek week = new TrainingPlanWeek();
@@ -48,11 +50,11 @@ public class TrainingPlanService {
                 day.setWeek(week);
 
                 // 4. Mapear Slots de Exercícios
-                for (ExerciciosSlotRequest slotDto : dayDto.exercicios()) { // [cite: 166]
+                for (ExercicioSlot slotDto : dayDto.exercicios()) {
                     ExercicioSlot slot = new ExercicioSlot(); // Nome da sua Entidade
 
                     Exercicio exercicio = exercicioRepository.findById(slotDto.exerciciosId())
-                            .orElseThrow(() -> new RuntimeException("Exercício não encontrado: " + slotDto.exerciseId()));
+                            .orElseThrow(() -> new RuntimeException("Exercício não encontrado: " + slotDto.exerciciosId()));
 
                     slot.setExercicio(exercicio);
                     slot.setSets(slotDto.sets());
@@ -61,7 +63,7 @@ public class TrainingPlanService {
                     slot.setRestSeconds(slotDto.restSeconds());
                     slot.setDay(day);
 
-                    day.getExercises().add(slot);
+                    day.getExercicios().add(slot);
                 }
                 week.getDays().add(day);
             }
@@ -95,15 +97,15 @@ public class TrainingPlanService {
                 day.getId(),
                 day.getDayOfWeek(),
                 day.getSplitFocus(),
-                day.getExercises().stream().map(this::mapSlot).toList()
+                day.getExercicios().stream().map(this::mapSlot).toList()
         );
     }
 
     private ExercicioSlotResponse mapSlot(ExercicioSlot slot) {
         return new ExercicioSlotResponse(
                 slot.getId(),
-                slot.getExercicio().getId(),
-                slot.getExercicio().getTitulo(), // [cite: 70, 101]
+                slot.getExercicios().getId(),
+                slot.getExercicios().getTitulo(), // [cite: 70, 101]
                 slot.getSets(),
                 slot.getReps(),
                 slot.getWeightKg(),
