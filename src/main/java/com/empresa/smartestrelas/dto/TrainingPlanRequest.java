@@ -17,6 +17,10 @@ public record TrainingPlanRequest(
         Integer weekCount,
 
         @NotNull(message = "A lista de semanas não pode ser nula")
-        List<TrainingPlanWeekRequest> weeks
-) {}
+        List<ExerciciosSlotRequest> exercicios
+) {
+        public Iterable<? extends TrainingPlanWeekRequest> weeks() {
+                return  null;
+        }
+}
 

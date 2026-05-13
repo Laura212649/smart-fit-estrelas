@@ -6,8 +6,8 @@ import java.time.DayOfWeek;
 import java.util.List;
 
 public class TrainingPlanDayResponse {
-    Long id,
-    DayOfWeek dayOfWeek,
-    SplitFocus splitFocus,
-    List<ExercicioSlotResponse> exercises
+    Long id;
+    DayOfWeek dayOfWeek;
+    SplitFocus splitFocus;
+    List<ExercicioSlotResponse> exercises;
 }
