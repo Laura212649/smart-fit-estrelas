@@ -2,7 +2,6 @@ package com.empresa.smartestrelas.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.aot.generate.GeneratedTypeReference;
 
 import java.util.List;
 
@@ -28,27 +27,27 @@ public class Exercicio {
     // Relacionamento com Equipamentos [cite: 74, 215, 239]
     @ManyToMany
     @JoinTable(
-            name = "exercise_equipment",
-            joinColumns = @JoinColumn(name = "exercise_id"),
-            inverseJoinColumns = @JoinColumn(name = "equipment_id")
+            name = "exercicios_equipamentos",
+            joinColumns = @JoinColumn(name = "exercicios_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipamentos_id")
     )
-    private List<Equipamento> equipamentos;
+    private List<Equipamentos> equipamentos;
 
     // Relacionamento com Músculos Primários [cite: 75, 215, 239]
     @ManyToMany
     @JoinTable(
-            name = "exercise_primary_muscles",
-            joinColumns = @JoinColumn(name = "exercise_id"),
-            inverseJoinColumns = @JoinColumn(name = "muscle_id")
+            name = "exercicios_primary_musculos",
+            joinColumns = @JoinColumn(name = "exercicios_id"),
+            inverseJoinColumns = @JoinColumn(name = "musculos_id")
     )
     private List<Musculos> primaryMusculos;
 
     // Relacionamento com Músculos Secundários [cite: 76, 215, 239]
     @ManyToMany
     @JoinTable(
-            name = "exercise_secondary_muscles",
-            joinColumns = @JoinColumn(name = "exercise_id"),
-            inverseJoinColumns = @JoinColumn(name = "muscle_id")
+            name = "exercicios_secondary_musculos",
+            joinColumns = @JoinColumn(name = "exercicios_id"),
+            inverseJoinColumns = @JoinColumn(name = "musculos_id")
     )
     private List<Musculos> secondaryMusculos;
 }

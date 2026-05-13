@@ -1,7 +1,7 @@
 package com.empresa.smartestrelas.config;
 
 
-import com.empresa.smartestrelas.model.Equipamento;
+import com.empresa.smartestrelas.model.Equipamentos;
 import com.empresa.smartestrelas.model.Musculos;
 import com.empresa.smartestrelas.repository.EquipamentoRepository;
 import com.empresa.smartestrelas.repository.MusculosRepository;
@@ -15,15 +15,15 @@ public class DatabaseSeeder {
     CommandLineRunner initDatabase(EquipamentoRepository equipRepo, MusculosRepository musculosRepo) {
         return args -> {
             if (equipRepo.count() == 0) {
-                Equipamento e1 = new Equipamento();
+                Equipamentos e1 = new Equipamentos();
                 e1.setNome("Barbell");
                 equipRepo.save(e1);
 
-                Equipamento bench = new Equipamento();
+                Equipamentos bench = new Equipamentos();
                 bench.setNome("Bench");
                 equipRepo.save(bench);
 
-                Equipamento dumbbell = new Equipamento();
+                Equipamentos dumbbell = new Equipamentos();
                 dumbbell.setNome("Dumbbell");
                 equipRepo.save(dumbbell);
             }
