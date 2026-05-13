@@ -88,4 +88,6 @@ public class TrainingPlan {
         this.weeks = weeks;
 
     }
-}
+    public TrainingPlan() {
+    }
+    }

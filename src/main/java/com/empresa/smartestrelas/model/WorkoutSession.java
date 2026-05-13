@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "workout_sessions")
@@ -23,8 +24,11 @@ public class WorkoutSession {
     private Usuario usuario; // Usuário que realizou o treino
 
     @OneToMany(mappedBy = "workoutSession", cascade = CascadeType.ALL)
-    private List<PerformedExercicos> performedExercicios = new ArrayList<>(); // Lista de exercícios feitos
+    private List<PerformedExercicios> performedExercicios = new ArrayList<PerformedExercicios>();// Lista de exercícios feitos
 
+    public List<PerformedExercicios> getPerformedExercises() {
+        return performedExercicios;
+    }
     public Long getId() {
         return id;
     }
@@ -57,11 +61,11 @@ public class WorkoutSession {
         this.usuario = usuario;
     }
 
-    public List<PerformedExercicos> getPerformedExercicios() {
+    public List<PerformedExercicios> getPerformedExercicios() {
         return performedExercicios;
     }
 
-    public void setPerformedExercicios(List<PerformedExercicos> performedExercicios) {
+    public void setPerformedExercicios(List<PerformedExercicios> performedExercicios) {
         this.performedExercicios = performedExercicios;
     }
 }
