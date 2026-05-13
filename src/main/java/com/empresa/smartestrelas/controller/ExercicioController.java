@@ -2,6 +2,7 @@ package com.empresa.smartestrelas.controller;
 
 
 import com.empresa.smartestrelas.dto.ExercicioRequest;
+import com.empresa.smartestrelas.dto.ExercicioResponse;
 import com.empresa.smartestrelas.model.Exercicio;
 import com.empresa.smartestrelas.service.ExercicioService;
 import jakarta.validation.Valid;
@@ -20,9 +21,9 @@ public class ExercicioController {
 
     // POST /exercicios (Admin) - Cadastra um novo exercício
     @PostMapping
-    public ResponseEntity<Exercicio> criar(@RequestBody @Valid ExercicioRequest dto) {
-        Exercicio novo = exercicioService.salvarComIds(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novo);
+    public ResponseEntity<ExercicioResponse> criar(@RequestBody @Valid ExercicioRequest request) {
+        ExercicioResponse response = exercicioService.criar(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     // GET /exercicios - Lista todos com suporte a filtros
