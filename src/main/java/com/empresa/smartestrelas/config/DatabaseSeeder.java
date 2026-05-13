@@ -33,6 +33,16 @@ public class DatabaseSeeder {
                 chest.setNome("Peitoral maior");
                 chest.setNomeEn("Pectoralis major");
                 musculosRepo.save(chest);
+
+                Musculos deltoid = new Musculos();
+                deltoid.setNome("Deltoide anterior");
+                deltoid.setNomeEn("Anterior deltoid");
+                musculosRepo.save(deltoid);
+
+                Musculos triceps = new Musculos();
+                triceps.setNome("Tríceps braquial");
+                triceps.setNomeEn("Triceps brachii");
+                musculosRepo.save(triceps);
             }
 
             System.out.println("Base de dados populada com sucesso!");
