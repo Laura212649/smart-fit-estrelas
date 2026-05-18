@@ -1,7 +1,18 @@
 package com.empresa.smartestrelas.model;
 
+
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Embeddable
-public record PerformedSet(Integer reps, Double weightKg) {
-} // Registro de repetições e peso real
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class PerformedSet {
+    private Integer reps;
+    private Double weightKg;
+}
