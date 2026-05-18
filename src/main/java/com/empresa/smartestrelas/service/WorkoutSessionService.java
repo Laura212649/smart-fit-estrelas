@@ -4,23 +4,21 @@ import com.empresa.smartestrelas.dto.PerformedExercicioRequest;
 import com.empresa.smartestrelas.dto.PersonalRecordResponse;
 import com.empresa.smartestrelas.dto.WorkoutSessionRequest;
 import com.empresa.smartestrelas.model.*;
+import com.empresa.smartestrelas.repository.ExercicioRepository;
 import com.empresa.smartestrelas.repository.TrainingPlanDayRepository;
 import com.empresa.smartestrelas.repository.WorkoutSessionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class WorkoutSessionService {
-    @Autowired
+
     private WorkoutSessionRepository repository;
-
-    @Autowired
     private TrainingPlanDayRepository dayRepository;
-
-    @Autowired
     private ExercicioRepository exercicioRepository;
 
     @Transactional
@@ -34,7 +32,7 @@ public class WorkoutSessionService {
                 .orElseThrow(() -> new RuntimeException("Dia do plano não encontrado"));
         sessao.setTrainingPlanDay(dia);
 
-        // Mapeia os exercícios realizados e suas séries (Sets)
+        // Mapeia os exercícios realizados e as suas séries (‘Sets’)
         for (PerformedExercicioRequest exReq : request.exercises()) {
             PerformedExercicios realizado = new PerformedExercicios();
 
@@ -57,8 +55,11 @@ public class WorkoutSessionService {
 
     // Lógica para o Personal Record (PR)
     public PersonalRecordResponse obterPR(Long exerciseId, Usuario usuario) {
-        // O repositório fará o trabalho pesado de buscar o maior peso
-        return repository.findMaxWeightByExerciseAndUser(exerciseId, usuario.getId())
-                .orElseThrow(() -> new RuntimeException("Nenhum registro encontrado para este exercício"));
+            return repository.findMaxWeightByExerciseAndUser(exerciseId, usuario.getId())
+                    .orElseThrow(() -> new RuntimeException("Nenhum registro encontrado para este exercício"));
+        }
+
+
+
     }
-}
+
