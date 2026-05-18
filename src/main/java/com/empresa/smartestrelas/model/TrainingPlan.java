@@ -3,49 +3,46 @@ package com.empresa.smartestrelas.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "training_plans")
+@Table(name = "Planos_Treino")
 public class TrainingPlan {
+    @Setter
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome do plano é obrigatório") // Requisito de campo obrigatório [cite: 160]
+    @Setter
+    @Getter
+    @NotBlank(message = "O nome do plano é obrigatório")
+    @Column(name = "nome")
     private String name;
 
-    @NotNull(message = "O objetivo é obrigatório") // Deve aceitar WEIGHT_LOSS, MUSCLE_GAIN ou CONDITIONING [cite: 161]
+    @NotNull(message = "O objetivo é obrigatório")
     @Enumerated(EnumType.STRING)
+    @Column(name = "objetivo")
     private Goal goal;
 
-    @NotNull(message = "O número de semanas é obrigatório") // [cite: 162]
+    @NotNull(message = "O número de semanas é obrigatório")
+    @Column(name = "quantidade_semanas")
     private Integer weekCount;
 
+    @Setter
+    @Getter
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario; // Relacionamento para identificar o dono do plano [cite: 152]
 
+    @Setter
+    @Getter
     @OneToMany(mappedBy = "trainingPlan", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainingPlanWeek> weeks = new ArrayList<>(); // Lista de semanas do plano
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public @NotNull(message = "O objetivo é obrigatório") Goal getGoal() {
         return goal;
@@ -61,22 +58,6 @@ public class TrainingPlan {
 
     public void setWeekCount(@NotNull(message = "O número de semanas é obrigatório") Integer weekCount) {
         this.weekCount = weekCount;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public List<TrainingPlanWeek> getWeeks() {
-        return weeks;
-    }
-
-    public void setWeeks(List<TrainingPlanWeek> weeks) {
-        this.weeks = weeks;
     }
 
     public TrainingPlan(Long id, String name, Goal goal, Integer weekCount, Usuario usuario, List<TrainingPlanWeek> weeks) {

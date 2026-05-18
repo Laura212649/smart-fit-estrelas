@@ -20,7 +20,7 @@ public class UsuarioRequest {
     private String email;
 
     @NotBlank(message = "A senha é obrigatória")
-    @Size(min = 8,message = "A senha deve conter pelo menos 8 caracteres" )
+    @Size(min = 8,message = "A senha deve conter pelo menos 8 caracteres")
     private String password;
 
     @NotNull(message = "Nível de treino é obrigatório")

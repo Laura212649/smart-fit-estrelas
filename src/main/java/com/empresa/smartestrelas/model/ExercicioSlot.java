@@ -2,50 +2,74 @@ package com.empresa.smartestrelas.model;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "execicio_slots")
+@Table(name = "exercicios_slots")
 public class ExercicioSlot {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "exercicio_id")
-    private Exercicio exercicio; // O exercício do seu catálogo [cite: 166]
+    @JoinColumn(name = "exercicios_id")
+    private Exercicio exercicio;
 
+    @Getter
     @Setter
-    public Integer sets; // Séries [cite: 139]
+    @Column(name = "series")
+    public Integer sets; // Séries
+
+    @Getter
     @Setter
-    public Integer reps; // Repetições [cite: 143]
+    @Column(name = "repeticoes")
+    public Integer reps; // Repetições
+
+    @Getter
     @Setter
-    public Double weightKg; // Carga sugerida [cite: 144]
+    @Column(name = "peso_kg")
+    public Double weightKg; // Carga sugerida
+
+    @Getter
     @Setter
-    public Integer restSeconds; // Tempo de descanso [cite: 145]
+    @Column(name = "segundos_descanso")
+    public Integer restSeconds; // Tempo de descanso
 
     @Setter
     @ManyToOne
-    @JoinColumn(name = "day_id")
-    private TrainingPlanDay day;
+    @JoinColumn(name = "dia_id")
+    private TrainingPlanDay dia;
 
     public ExercicioSlot() {}
 
 
     public Integer sets() {
+
         return null;
     }
 
     public Integer reps() {
+
         return null;
     }
 
     public Double weightKg() {
+
         return null;
     }
 
     public Integer restSeconds() {
         return null;
     }
+
+    public Long exerciciosId() {
+        return null;
+
+    }
+
 }
