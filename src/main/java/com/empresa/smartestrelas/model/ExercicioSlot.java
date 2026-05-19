@@ -6,39 +6,42 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "exercicios_slots")
+@Getter
+@Setter
+@Table(name = "execicio_slots")
 public class ExercicioSlot {
-    @Getter
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @Getter
     @Setter
+    @Getter
     @ManyToOne
-    @JoinColumn(name = "exercicios_id")
-    private Exercicio exercicio;
+    @JoinColumn(name = "exercicio_id")
+    private Exercicio exercicio; // O exercício do seu catálogo [cite: 166]
 
-    @Getter
     @Setter
+    @Getter
     @Column(name = "series")
-    public Integer sets; // Séries
+    public Integer sets;
 
-    @Getter
+
     @Setter
+    @Getter
     @Column(name = "repeticoes")
-    public Integer reps; // Repetições
+    public Integer reps;
 
-    @Getter
-    @Setter
     @Column(name = "peso_kg")
-    public Double weightKg; // Carga sugerida
-
-    @Getter
     @Setter
+    @Getter
+    public Double weightKg;
+
+
+    @Setter
+    @Getter
     @Column(name = "segundos_descanso")
-    public Integer restSeconds; // Tempo de descanso
+    public Integer restSeconds; // Tempo de descanso [cite: 145]
 
     @Setter
     @ManyToOne
@@ -49,17 +52,14 @@ public class ExercicioSlot {
 
 
     public Integer sets() {
-
         return null;
     }
 
     public Integer reps() {
-
         return null;
     }
 
     public Double weightKg() {
-
         return null;
     }
 
@@ -67,9 +67,11 @@ public class ExercicioSlot {
         return null;
     }
 
-    public Long exerciciosId() {
+    public Long exercicios() {
         return null;
-
     }
 
+    public Long exerciciosId() {
+        return  null;
+    }
 }
